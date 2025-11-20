@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Quiz {
+    private List<Question> questions;
+    private int score;
+
+    public Quiz() {
+        questions = new ArrayList<>();
+        score = 0;
+        loadQuestions();
+    }
+
+    private void loadQuestions() {
+        questions.add(new Question(
+                "Which planet is known as the Red Planet?",
+                new String[]{"Earth", "Mars", "Jupiter", "Saturn"},
+                2));
+
+        questions.add(new Question(
+                "Who wrote the play 'Romeo and Juliet'?",
+                new String[]{"Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"},
+                2));
+
+        questions.add(new Question(
+                "What is the capital of Australia?",
+                new String[]{"Sydney", "Melbourne", "Canberra", "Perth"},
+                3));
+    }
+
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== High School General Knowledge Quiz ===\n");
+
+        for (Question q : questions) {
+            q.display();
+            System.out.print("Your answer: ");
+
+            int answer = scanner.nextInt();
+            if (q.checkAnswer(answer)) {
+                System.out.println("Correct!\n");
+                score++;
+            } else {
+                System.out.println("Incorrect.\n");
+            }
+        }
+
+        System.out.println("Quiz Completed!");
+        System.out.println("Your final score: " + score + " / " + questions.size());
+    }
+}
